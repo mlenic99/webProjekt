@@ -1,172 +1,211 @@
-var cart = {
-  hPdt : null, // HTML products list
-  hItems: null, // HTML current cart
-  items: {},// Current items in cart, This is simply an object that has the format of PRODUCT ID : QUANTITY.
-
-  init: function () {
-    // DOHVATI HTML ELEMENTE (proizvodi i košarica)
-    cart.hPdt = document.getElementById("cart-products");
-    cart.hItems = document.getElementById("cart-items");
-
-    // STVORI LISTU PROIZVODA
-    cart.hPdt.innerHTML = "";
-    let p, item, part;
-    for (let id in products) {
-
-      p = products[id];
-      item = document.createElement("div");
-      item.className = "p-item col-12 col-md-3";
-      cart.hPdt.appendChild(item);
-
-      // PRODUCT IMAGE
-      part = document.createElement("img");
-      part.src = p.img;
-      part.className = "p-img mw-100";
-      part.alt = p.name;
-      item.appendChild(part);
-
-      // PRODUCT NAME
-      part = document.createElement("div");
-      part.innerHTML = p.name;
-      part.className = "p-name banner-prime-text mt-3 mb-2";
-      item.appendChild(part);
-
-      // PRODUCT PRICE
-      part = document.createElement("div");
-      part.innerHTML = `<span class="price-text-color"> ${p.price},00 kn</span> / kg  `
-      part.className = "p-price";
-      item.appendChild(part);
-
-      // QUANTITY
-      part = document.createElement("span");
-      part.innerHTML = `
-                <label for="quantity" class="content-text">Količina: </label>
-                <input type="number" value="1" class="c-qty input-number ml-1" id="input${id}" min="0" max="99" aria-hidden="true" >`
-      item.appendChild(part);
-
-      // ADD TO CART
-      part = document.createElement("input");
-      part.type = "button";
-      part.value = "Add to Cart";
-      part.className = "cart p-add btn btn-primary w-75 p-2 mt-2";
-      part.onclick = cart.add;
-      part.dataset.id = id;
-      part.id = "add-btn-" + id;
-      item.appendChild(part);
+$(document).ready(function () {
+  $.ajax({
+    type: 'post',
+    url: 'load-cart.php',
+    data: {
+      total_cart_items: "totalitems"
+    },
+    success: function (response) {
+      document.getElementById("total_items").value = response;
     }
-    cart.list();
-  },
+  });
 
-  list: function () {
-    //RESET
-    cart.hItems.innerHTML = "";
-    cart.hItems.style.display = 'none';
-    let item, part, pdt;
-    let empty = true;
-    total = 0;
-    for (let key in cart.items) {
-      if (cart.items.hasOwnProperty(key)) { empty = false; break; }
+  show_big_cart();
+  show_sum();
+  show_products();
+});
+
+function itemhover(id){
+
+  $("#item"+id).hover(
+    function() { $("#item"+id).addClass( "hover" );}
+, function (){$("#item"+id).removeClass( "hover" );
+    });
+}
+
+function show_big_cart() {
+  $.ajax({
+    type: 'post',
+    url: 'load-cart.php',
+    data: {
+      showcart: "cart-large"
+    },
+    success: function (response) {
+      document.getElementById("items-cart").innerHTML = response;
     }
-    //CART IS EMPTY
-    if (empty) {
-      document.querySelector("#item-count").textContent = "0";
-      item = document.createElement("div");
-      item.innerHTML = `
-      <p class="content-text">Moja košarica </p>
-      <hr>
-      <p>Košarica je prazna </p>
-      `;
-      cart.hItems.appendChild(item);
+  });
+}
+function show_sum() {
+  $.ajax({
+    type: 'post',
+    url: 'load-cart.php',
+    data: {
+      sum: "cart-large"
+    },
+    success: function (response) {
+      document.getElementById("sum").innerHTML = response;
     }
+  });
+}
+function show_products() {
+  $.ajax({
+    type: 'post',
+    url: 'load-cart.php',
+    data: {
+      showcart: "finalise"
+    },
+    success: function (response) {
+      document.getElementById("proizvodi").innerHTML = response;
+    }
+  });
+}
 
-    // CART IS NOT EMPTY - LIST ITEMS
-    else {
-      item = document.createElement("div");
-      item.innerHTML = `<p class="content-text">Moja košarica </p><hr>`;
-      cart.hItems.appendChild(item);
-      cart.hItems.style.display = 'block';
-      let p, subtotal = 0, total = 0;
-      for (let id in cart.items) {
-        // ITEM
-        p = products[id];
-        item = document.createElement("div");
-        item.className = "c-item container row align-items-start";
-        cart.hItems.appendChild(item);
+function toggle_cart() {
+  $.ajax({
+    type: 'post',
+    url: 'load-cart.php',
+    data: {
+      showcart: "cart"
+    },
+    success: function (response) {
+      document.getElementById("items").innerHTML = response;
+      $("#cart-items").slideToggle();
+    }
+  });
+}
 
-        //IMG 
-        part = document.createElement("img");
-        part.src = p.img;
-        part.className = "c-img col-5";
-        part.alt = p.name;
-        item.appendChild(part);
 
-        // NAME
-        part = document.createElement("div");
-        part.className = " c-name col";
-        subtotal = cart.items[id] * p.price;
-        part.innerHTML = ` 
-          <p class="cart-title mb-1 font-weight-bold">${p.name}</p>
-          <p class="cart-text">Cijena: <span class="font-weight-bold"> ${subtotal},00 kn </span> </p>
-          <p class="cart-text">Količina:  <span class="font-weight-bold"> ${cart.items[id]} </span> </p> `;
-        item.appendChild(part);
+function show_cart() {
+  $.ajax({
+    type: 'post',
+    url: 'load-cart.php',
+    data: {
+      showcart: "cart"
+    },
+    success: function (response) {
+      document.getElementById("items").innerHTML = response;
+    }
+  });
+}
 
-        part = document.createElement("input");
-        part.type = "button";
-        part.value = "x";
-        part.dataset.id = id;
-        part.className = "c-del btn col-1";
-        part.addEventListener("click", cart.remove);
-        item.appendChild(part);
-        var a = parseInt(cart.items[id]);
-        total += a;
+function cart(idInt) {
+  let id = idInt.toString();
+  let qty = document.getElementById("input" + id).value;
+  let qtyTotal = document.getElementById(id + "_qty").value;
+  if (qty < 0) {
+    alert("Ne može se unjeti negativan broj");
+  } else if (parseInt(qty) > parseInt(qtyTotal)) {
+    alert("Nažalost nema "+qty+" ulaznica. Ostalo je još " + qtyTotal + " komada.");
+  }  else {
+    $.ajax({
+      type: 'post',
+      url: 'load-cart.php',
+      data: {
+        item_id: id,
+        item_qty: qty
+      },
+      success: function (response) {
+        document.getElementById("total_items").value = response;
       }
+    });
+    show_cart();
+    $("#cart-items").show(1000);
+    document.getElementById("btnAdd" + id).disabled = true;
+    document.getElementById("btnAdd" + id).value = "Dodano";
+    document.getElementById("input" + id).disabled = true;
+  }
+}
 
-      // CHECKOUT BUTTON
-      item = document.createElement("hr")
-      cart.hItems.appendChild(item);
-      item = document.createElement("input");
-      item.type = "button";
-      item.value = "KUPI SADA";
-      item.addEventListener("click", cart.checkout);
-      item.className = "c-checkout cart btn btn-primary";
-      cart.hItems.appendChild(item);
-
-      //UPDATE COUNT
-      let counter = document.querySelector("#item-count");
-      txt = total.toString();
-      counter.textContent =txt;
+function end_session() {
+  $.ajax({
+    type: 'post',
+    url: 'load-cart.php',
+    data: {
+      endSession: 1
+    },
+    success: function (response) {
+      document.getElementById("total_items").value = 0;
+      document.getElementById("items").innerHTML = "Košarica je prazna";
     }
-  },
-
-  add: function () {
-    let itemCount = document.querySelector("#input"+this.dataset.id).value;
-    cart.items[this.dataset.id] = itemCount;
-    this.disabled = true;
-
-    cart.list();
-  },
-
-  remove: function () {
-    delete cart.items[this.dataset.id];
-    let btn = document.querySelector("#add-btn-" + this.dataset.id);
-    btn.disabled = false;
-    cart.list();
-  },
-
+  });
 
 }
-window.addEventListener("DOMContentLoaded", cart.init);
 
-var cartBtn = document.querySelector("#cart")
-cartBtn.onclick = function() {
-  var cart = document.querySelector('#cart-items');
-  if (cart.style.display !== 'none') {
-    cart.style.display = 'none';
+function remove_from_cart(id) {
+  $.ajax({
+    type: 'post',
+    url: 'load-cart.php',
+    data: {
+      removeProduct: id
+    },
+    success: function (response) {
+      document.getElementById("total_items").value = response;
+      if(response == 0) {
+        $("#cutomer").hide();
+        $("#order-detail").hide();
+      }else {
+        $("#cutomer").show();
+        $("#order-detail").show();
+      }
+    }
+  });
+
+  show_big_cart();
+  show_sum();
+  show_products();
+  show_cart();
+  document.getElementById("btnAdd" + id).disabled = false;
+  document.getElementById("input" + id).disabled = false;
+  document.getElementById("btnAdd" + id).value = "Add To Cart";
+
+}
+
+function sendmessage() {
+  if (validateContactForm()) {
+    let name = document.getElementById("inputNameSurname");
+    let text = document.getElementById("inputComment");
+    let email = document.getElementById("userEmail");
+    alert("Mail uspješno poslan. Odgovorit ćemo čim prije na "+email.value+".");
+    /*   $.ajax({
+        type: 'post',
+        url: 'contact-form.php',
+        data: {
+          contactform: 1,
+          name: name,
+          text: text,
+          email: email
+        },
+        success: function (response) {
+          document.getElementById("contactsucess").innerHTML = response;
+        }
+      }); */
   }
-  else {
-    cart.style.display = 'block';
+}
+function validateContactForm() {
+  var valid = true;
+  var userEmail = $("#userEmail").val();
+  var userName = $("#inputNameSurname").val();
+  var inputComment = $("#inputComment").val();
+
+  if (!userEmail.match(/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/)) {
+    $("#userEmail-info").html("Invalid Email Address.");
+    $("#userEmail").css('border', '#e66262 1px solid');
+    valid = false;
   }
-};
+  if (userEmail =="") {
+    $("#userEmail-info").html("Invalid Email Address.");
+    $("#userEmail").css('border', '#e66262 1px solid');
+    valid = false;
+  }
+  if (userName =="") {
+    $("#userName").css('border', '#e66262 1px solid');
+    valid = false;
+  }
+  if (inputComment =="") {
+    $("#inputComment").css('border', '#e66262 1px solid');
+    valid = false;
+  }
 
-
+  return valid;
+}
 
