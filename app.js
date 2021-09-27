@@ -9,7 +9,8 @@ $(document).ready(function () {
       document.getElementById("total_items").value = response;
     }
   });
-
+  $(".prime-text").delay("slow").animate({ fontSize: '6em' }, "slow");
+  $(".prime-text").delay("slow").animate({ fontSize: '5em' }, "slow"); 
   show_big_cart();
   show_sum();
   show_products();
@@ -112,6 +113,7 @@ function cart(idInt) {
     $("#cart-items").show(1000);
     document.getElementById("btnAdd" + id).disabled = true;
     document.getElementById("btnAdd" + id).value = "Dodano";
+    document.getElementById("btnAdd" + id).setAttribute("onclick","cart('"+ id+"');");
     document.getElementById("input" + id).disabled = true;
   }
 }
@@ -161,51 +163,83 @@ function remove_from_cart(id) {
 }
 
 function sendmessage() {
-  if (validateContactForm()) {
-    let name = document.getElementById("inputNameSurname");
-    let text = document.getElementById("inputComment");
-    let email = document.getElementById("userEmail");
-    alert("Mail uspješno poslan. Odgovorit ćemo čim prije na "+email.value+".");
-    /*   $.ajax({
-        type: 'post',
-        url: 'contact-form.php',
-        data: {
-          contactform: 1,
-          name: name,
-          text: text,
-          email: email
-        },
-        success: function (response) {
-          document.getElementById("contactsucess").innerHTML = response;
-        }
-      }); */
-  }
+  alert("Mail uspješno poslan. Odgovorit ćemo čim prije na "+email.value+".");
 }
 function validateContactForm() {
-  var valid = true;
-  var userEmail = $("#userEmail").val();
-  var userName = $("#inputNameSurname").val();
-  var inputComment = $("#inputComment").val();
+  let name = document.forms["contact"]["name"];
+  let text = document.getElementById("inputComment");
+  let email = document.forms["contact"]["email"];
 
-  if (!userEmail.match(/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/)) {
-    $("#userEmail-info").html("Invalid Email Address.");
-    $("#userEmail").css('border', '#e66262 1px solid');
-    valid = false;
+  if (name.value == "") {
+    name.focus();
+    document.getElementById("contactsubmit").disabled = true;
+    return false;
+}
+if (email.value == "") {
+    email.focus();
+    document.getElementById("contactsubmit").disabled = true;
+    return false;
+
+}
+
+if (!email.value.match(/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/)) {
+  email.focus();
+    alert("Unesi pravilan email");
+    document.getElementById("contactsubmit").disabled = true;
+    return false;
+}
+
+document.getElementById("contactsubmit").disabled = false;
+return true;
+}
+
+
+
+function ValidationForm() {
+  let name = document.forms["cart"]["name"];
+  let address = document.forms["cart"]["address"];
+  let postcode = document.forms["cart"]["postcode"];
+  let town = document.forms["cart"]["town"];
+  let email = document.forms["cart"]["email"];
+  if (name.value == "") {
+      name.focus();
+      document.getElementById("btn-finish").disabled = true;
+      return false;
   }
-  if (userEmail =="") {
-    $("#userEmail-info").html("Invalid Email Address.");
-    $("#userEmail").css('border', '#e66262 1px solid');
-    valid = false;
-  }
-  if (userName =="") {
-    $("#userName").css('border', '#e66262 1px solid');
-    valid = false;
-  }
-  if (inputComment =="") {
-    $("#inputComment").css('border', '#e66262 1px solid');
-    valid = false;
+  if (email.value == "") {
+      email.focus();
+      document.getElementById("btn-finish").disabled = true;
+      return false;
+
   }
 
-  return valid;
+  if (!email.value.match(/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/)) {
+    email.focus();
+      alert("Unesi pravilan email");
+      email.focus();
+      document.getElementById("btn-finish").disabled = true;
+      return false;
+
+  }
+  if (address.value == "") {
+      address.focus();
+      document.getElementById("btn-finish").disabled = true;
+      return false;
+
+  }
+  if (postcode.value == "") {
+      postcode.focus();
+      document.getElementById("btn-finish").disabled = true;
+      return false;
+
+  }
+  if (town.value == "") {
+      town.focus();
+      document.getElementById("btn-finish").disabled = true;
+      return false;
+
+  }
+  
+  document.getElementById("btn-finish").disabled = false;
 }
 

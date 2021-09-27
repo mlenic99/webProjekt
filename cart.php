@@ -46,7 +46,7 @@ if ($_SESSION['total_products'] == 0){
                             </div>
                             <div class="form-outline mb-1">
                                 <label class="form-label">Email
-                                    <input type="email" onchange="ValidationForm()" class="form-control form-control-lg" name="email" placeholder="Email" aria-label="Mail" required></label>
+                                    <input type="email" id="userEmail" onchange="ValidationForm()" class="form-control form-control-lg" name="email" placeholder="Email" aria-label="Mail" required></label>
                             </div>
                             <input type="submit" id="btn-finish" class="btn btn-primary btn-lg btn-block" value="ZAVRŠI NARUDŽBU" name="finsihOrder" aria-label="Submit" disabled>
 

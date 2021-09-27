@@ -1,6 +1,4 @@
 <?php
-require 'header.php';
-require 'navbar.php';
 session_start();
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = array();
@@ -62,9 +60,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $query->setFetchMode(PDO::FETCH_ASSOC);
     $row = $query->fetch();
     $orderID = $row['ordersID'];
+
+    require 'header.php';
+require 'navbar.php';
+
 } else {
-    //header("location: index.php");
-    echo "smth is wrong";
+    header("location: index.php");
+//    echo "smth is wrong";
 }
 ?>
 <div class="container " id="overview">

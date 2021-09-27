@@ -24,23 +24,23 @@ require 'navbar.php';
 
             </div>
             <div class="col-12 col-lg-6">
-                <form id="contactform" method="post" class="form form-inline float-right content-text form-row justify-content-center">
+                <form name="contact" method="post" class="form form-inline float-right content-text form-row justify-content-center">
                     <div class="col-12 col-lg-8 mb-3">
-                        <input type="text" name="UnesiImeIPrezime" id="inputNameSurname" placeholder="Unesi ime i prezime" class="form-control shadow w-100 h-100 p-4" aria-label="Your email" required>
+                        <input type="text" onchange="validateContactForm()" name="name" id="inputNameSurname" placeholder="Unesi ime i prezime" class="form-control shadow w-100 h-100 p-4" aria-label="Your email" required>
                     </div>
                     <div class="col-12 col-lg-8 mb-3">
-                        <input type="email" name="contactemail" id="userEmail" placeholder="Unesi email adresu" class="form-control shadow w-100 h-100 p-4" aria-label="Your email" required>
+                        <input type="email" onchange="validateContactForm()" name="email" id="userEmail" placeholder="Unesi email adresu" class="form-control shadow w-100 h-100 p-4" aria-label="Your email" required>
                         <span id="userEmail-info" class="info"></span>
                     </div>
                     <div class="col-12 col-lg-8 mb-3">
                         <div class="form-group">
-                            <label for="comment"></label>
-                            <textarea class="form-control shadow w-100 h-100 p-4" name="unesiKomentar" id="inputComment" rows="3" placeholder="Ideja" required></textarea>
+                            <label for="text"></label>
+                            <textarea onchange="validateContactForm()" class="form-control shadow w-100 h-100 p-4" name="text" id="inputComment" rows="3" placeholder="Ideja" required></textarea>
                         </div>
                     </div>
 
                     <div class="col-12 col-lg-8 mb-3">
-                        <input type="submit" name="send" id="submit" value="Send" class="btn btn-primary w-100 p-3" aria-label="Submit" onclick="sendmessage()">
+                        <input type="submit" name="send" id="contactsubmit" value="Send" class="btn btn-primary w-100 p-3" aria-label="Submit" onclick="sendmessage()" disabled>
                     </div>
                 </form>
             </div>

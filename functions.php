@@ -67,11 +67,8 @@ function show_products($stmt)
 
 function show_product($stmt)
 {
-    $counter = 0;
     foreach ($stmt as $row) {
-        if ($counter == 4) {
-            break;
-        }
+        
         $id = $row['eventID'];
         $name = $row['eventName'];
         $sqldate = $row['eventDate'];
@@ -106,19 +103,19 @@ function show_product($stmt)
         
     <div>";
                 
-    if($row['productsQuantity']==0) {
+    if($qty==0) {
         echo "
         <label class='content-text'>
             Količina:
             <input type='number' value='0' class='c-qty input-number ml-1' id='input" . $id . "' min='0' max='" . $qty . "' aria-hidden='true' disabled></label>
-        <input type='button' id='btnAdd" . $id . "'value='Rasprodano' class='cart p-add btn btn-primary w-75 p-2 mt-2' disabled> </div> ";
+        <input type='button' id='btnAdd" . $id . "'value='Rasprodano' class='cart p-add btn btn-primary w-75 p-2 mt-2' onclick='cart(" . $id . ") disabled> </div> ";
 
     }elseif ($_SESSION['cart'][$id] !=0){
         echo "
         <label class='content-text'>
             Količina:
         <input type='number' value='".$_SESSION['cart'][$id]."' class='c-qty input-number ml-1' id='input" . $id . "' min='0' max='" . $qty . "' aria-hidden='true' disabled></label>
-        <input type='button' id='btnAdd" . $id . "'value='Dodano' class='cart p-add btn btn-primary w-75 p-2 mt-2' disabled> </div> ";
+        <input type='button' id='btnAdd" . $id . "'value='Dodano' class='cart p-add btn btn-primary w-75 p-2 mt-2'  disabled> </div> ";
     } 
     
     else {
@@ -136,7 +133,6 @@ function show_product($stmt)
 
         </div>     
     </div>  ";}
-        $counter++;
     }
 }
 

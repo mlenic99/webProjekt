@@ -28,12 +28,6 @@ require 'header.php';
 require 'navbar.php';
 ?>
 
-
-
-<body>
-
-
-
     <div id="hero_img">
         <div class="container p-5">
             <div class="row header align-items-center py-5">
@@ -85,16 +79,7 @@ require 'navbar.php';
         </div>
 
     </div>
-    <div class="row justify-content-center align-items-center">
-        <div class=" mb-4">
-            <h2 class="col-12">FIND BEST EVENTS</h2>
 
-            <div class="search-box">
-                <input type="text" autocomplete="off" placeholder="Search events..." />
-                <div class="result"></div>
-            </div>
-        </div>
-    </div>
 
 
     <!--Novo u ponudi!-->
@@ -106,7 +91,7 @@ require 'navbar.php';
     <div id="cart-wrap" class="container col-12 col-md-8 mb-5">
         <div id="cart-products" class="row align-items-top">
             <?php
-                    show_products($stmt);
+            show_products($stmt);
 
             ?>
         </div>
@@ -146,7 +131,6 @@ require 'navbar.php';
 
 
 
-<script src="index.js"></script>
     <?php
     require 'footer.php';
     ?>
