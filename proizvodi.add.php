@@ -11,16 +11,6 @@ try {
     die("ERROR: Could not connect. " . $e->getMessage());
 }
 
-$sql = <<<EOSQL
-    SELECT * FROM products 
-    EOSQL;
-
-$query = $conn->prepare($sql);
-
-$query->execute();
-$query->setFetchMode(PDO::FETCH_ASSOC);
-
-
 require 'header.php';
 ?>
 
@@ -63,8 +53,7 @@ require 'header.php';
                                     <label class="form-label">URL slike:
                                         <input type="text" class="form-control form-control-lg" name="eventImgURL" placeholder="URL Image" id="eventImgURL" aria-label="Event image" ></label>
                                 </div>
-                                <input default type="submit" class="btn btn-primary btn-lg" value="AŽURIRAJ" name="updateProduct" id="btnupdateProduct" aria-label="Submit">
-                                <input type="submit" value="Obriši" name="deleteProduct" class="btn btn-secondary btn-lg" id="btnDeleteProduct" aria-label="Submit">
+                                <input default type="submit" class="btn btn-primary btn-lg" value="DODAJ" name="updateProduct" id="btnupdateProduct" aria-label="Submit">
                                 <div>
                     </form>
                 </div>
