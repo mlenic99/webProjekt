@@ -44,8 +44,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if ($query->rowCount() > 0) {
             $row = $query->fetch();
             session_start();
-            $_SESSION['userUID'] = $row['userUID'];
-            setcookie("activeLogin", $row["userUID"], time() + (60 * 120));
+            $_SESSION['username'] = $row['username'];
+            setcookie("activeLogin", $row["username"], time() + (60 * 120));
             header("location: dashboard.php");
         } else {
             //No such user in database

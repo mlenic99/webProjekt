@@ -8,7 +8,7 @@
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0 flex-column align-items-center">
                 <li class="nav-item">
                     <a href="dashboard.php" class="nav-link" aria-current="page">
-                        Početna
+                        Događaji
                     </a>
                 </li>
                 <li class="nav-item">

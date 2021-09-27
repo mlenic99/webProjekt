@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 // if there is an "error" while loggin in
 if (isset($_GET["error"])) {
 
@@ -11,9 +11,10 @@ if (isset($_GET["error"])) {
 }
 
 // if cookie is set go directly do dashboard
-if (isset($_SESSION['usersUID']) &&  $_SESSION['usersUID']== 'admin' && isset($_COOKIE['activeLogin']))  {
+if (isset($_SESSION['username']) &&  $_SESSION['username']== 'admin' && isset($_COOKIE['activeLogin']))  {
   header("location: dashboard.php");
 }
+
 
 require 'header.php';
 ?>
