@@ -202,7 +202,7 @@ function listproducts()
         $name = $row['eventName'];
         $price = (float)$row['eventPrice'];
         $price_total = $qty * $price;
-        echo $name." (".$qty."): ".$price_total."<br>";
+        echo $name." ".$qty." x ".$price."<br>";
     }
 }
 
