@@ -39,7 +39,7 @@ require 'header.php';
     ?>
 
     <div class="container event">
-        <h2 class="my-4">Svi proizvodi</h2>
+        <h2 class="my-4">Svi događaji</h2>
         <div class="w-100 mb-5">
             <input type="button" value="Dodaj proizvod"
             onclick="location.href='proizvodi.add.php'"  
