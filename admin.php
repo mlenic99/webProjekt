@@ -1,6 +1,7 @@
 <?php
-session_start();
-// if there is an "error" while loggin in
+if(session_id() == '') {
+  session_start();
+}// if there is an "error" while loggin in
 if (isset($_GET["error"])) {
 
   if ($_GET["error"] == "NoLogin") {
@@ -23,9 +24,6 @@ require 'header.php';
   <?php
   require 'navbar.php';
   ?>
-
-
-
   <div class="container my-5 ">
     <div class="row d-flex justify-content-center align-items-center h-100 my-5">
       <div class="card col-12 col-md-8 col-lg-6 col-xl-5">

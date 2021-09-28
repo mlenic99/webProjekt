@@ -50,7 +50,7 @@ require 'header.php';
                             </div>
                             <div class="form-outline mb-4">
                                 <label class="form-label">Cijena kn:
-                                    <input type="number" class="form-control form-control-lg" name="eventPrice" placeholder="Price [kn/kg]" id="eventPrice" aria-label="Event price" value="<?php echo (float)$row['eventPrice']; ?>"></label>
+                                    <input type="number" class="form-control form-control-lg" name="eventPrice" placeholder="Price" id="eventPrice" aria-label="Event price" value="<?php echo (float)$row['eventPrice']; ?>"></label>
                             </div>
                             <div class="form-outline mb-4">
                                 <label class="form-label">Preostalo ulaznica:
@@ -79,7 +79,9 @@ require 'header.php';
                 </div>
             </div>
         </div>
+
     </div>
+</div>
 
 
 

@@ -11,39 +11,33 @@ try {
 } catch (PDOException $e) {
     die("ERROR: Could not connect. " . $e->getMessage());
 }
+
 session_start();
 require 'header.php';
 require 'navbar.php';
 ?>
+<div class="container">
+<?php
+$stmt = $conn->prepare("SELECT * FROM locations ");
+$stmt->execute();
+$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+$locationArray = array();
+foreach($stmt as $row) {
+    $id = $row['locationID'];
+    $location = $row['locationName'];
+    echo "<h2>".$location."</h2> 
+<div id='cart-wrap' >
+    <div id='cart-products' class='row align-items-top'>";
+    $stmtEvent = $conn->prepare("SELECT * FROM events WHERE eventLocation ='".$location."'");
+    $stmtEvent->execute();
+    $result = $stmtEvent->setFetchMode(PDO::FETCH_ASSOC);
+    show_products($stmtEvent);
+        echo "</div></div>";
 
+}
+?>
 
-<h2>Osijek</h2>
-<div id="cart-wrap" class="container col-12 col-md-8 mb-5">
-    <div id="cart-products" class="row align-items-top">
-        <?php
-        //DESC -> kako bi prikazao najnovije proizvode (imaju veći ID broj)
-        $stmt = $conn->prepare("SELECT * FROM events WHERE eventLocation ='Osijek'");
-        $stmt->execute();
-        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-
-        show_products($stmt);
-        ?>
-    </div>
 </div>
-
-<h2>Beograd</h2>
-<div id="cart-wrap" class="container col-12 col-md-8 mb-5">
-    <div id="cart-products" class="row align-items-top">
-        <?php
-        //DESC -> kako bi prikazao najnovije proizvode (imaju veći ID broj)
-        $stmt = $conn->prepare("SELECT * FROM events WHERE eventLocation ='Beograd'");
-        $stmt->execute();
-        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-        show_products($stmt);
-        ?>
-    </div>
-</div>
-
 
 <?php
 require 'footer.php';

@@ -9,18 +9,29 @@ $(document).ready(function () {
       document.getElementById("total_items").value = response;
     }
   });
-  $(".prime-text").delay("slow").animate({ fontSize: '6em' }, "slow");
-  $(".prime-text").delay("slow").animate({ fontSize: '5em' }, "slow"); 
+  $(".prime-text").delay("slow").animate({ fontSize: '+=1em' }, "slow");
+  $(".prime-text").delay("slow").animate({ fontSize: '-=1em' }, "slow");
   show_big_cart();
   show_sum();
   show_products();
+
+  $('#close_minicart').click(
+      function (e){
+        if ($('#cart-items').hasClass('open')) {
+          $('#cart-items').hide(500);
+          $("#cart-items").removeClass('open')
+        }
+      }
+  )
 });
+
+
 
 function itemhover(id){
 
   $("#item"+id).hover(
-    function() { $("#item"+id).addClass( "hover" );}
-, function (){$("#item"+id).removeClass( "hover" );
+    function() { $("#item"+id).addClass( "hover" , 1000);}
+, function (){$("#item"+id).removeClass( "hover", 1000 );
     });
 }
 
@@ -70,13 +81,21 @@ function toggle_cart() {
     },
     success: function (response) {
       document.getElementById("items").innerHTML = response;
-      $("#cart-items").slideToggle();
+      $("#cart-items").slideToggle(500);
+      $("#cart-items").toggleClass('open');
     }
   });
 }
 
+function hide_cart(){
+  if ($('#cart-items').hasClass('open')) {
+    $('#cart-items').hide(500);
+    $("#cart-items").removeClass('open')
+  }
+}
 
-function show_cart() {
+
+function show_cart_items() {
   $.ajax({
     type: 'post',
     url: 'load-cart.php',
@@ -109,8 +128,9 @@ function cart(idInt) {
         document.getElementById("total_items").value = response;
       }
     });
-    show_cart();
-    $("#cart-items").show(1000);
+    show_cart_items();
+    $("#cart-items").show(500);
+    $("#cart-items").addClass('open');
     document.getElementById("btnAdd" + id).disabled = true;
     document.getElementById("btnAdd" + id).value = "Dodano";
     document.getElementById("btnAdd" + id).setAttribute("onclick","cart('"+ id+"');");
@@ -143,10 +163,10 @@ function remove_from_cart(id) {
     success: function (response) {
       document.getElementById("total_items").value = response;
       if(response == 0) {
-        $("#cutomer").hide();
+        $("#customer").hide();
         $("#order-detail").hide();
       }else {
-        $("#cutomer").show();
+        $("#customer").show();
         $("#order-detail").show();
       }
     }
@@ -155,15 +175,19 @@ function remove_from_cart(id) {
   show_big_cart();
   show_sum();
   show_products();
-  show_cart();
+  show_cart_items();
   document.getElementById("btnAdd" + id).disabled = false;
   document.getElementById("input" + id).disabled = false;
   document.getElementById("btnAdd" + id).value = "Add To Cart";
 
 }
 
-function sendmessage() {
-  alert("Mail uspješno poslan. Odgovorit ćemo čim prije na "+email.value+".");
+function sendMessage() {
+  let email = document.forms["contact"]["email"];
+  $("#contact_form").hide();
+  $("#sucess_submit").show();
+  $("#sucess_submit").html("Mail uspješno poslan. Odgovorit ćemo čim prije na "+email.value+".");
+  //alert("Mail uspješno poslan. Odgovorit ćemo čim prije na "+email.value+".");
 }
 function validateContactForm() {
   let name = document.forms["contact"]["name"];

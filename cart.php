@@ -27,7 +27,7 @@ if ($_SESSION['total_products'] == 0){
             <div class="card-body m-2 p-3">
                 <form name="cart" method="post" id="orderinfo" action="overview.php">
                     <div id="">
-                        <h3 class="mb-5" id="formHeader">Podaci za dostavu</h>
+                        <h3 class="mb-5" id="formHeader">Podaci za dostavu</h3>
                             <div class="form-outline mb-1">
                                 <label class="form-label">Ime i prezime
                                     <input type="text" onchange="ValidationForm()" class="form-control form-control-lg" name="name" placeholder="Ime i prezime" aria-label="Ime i prezime" required></label>

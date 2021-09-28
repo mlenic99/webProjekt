@@ -5,11 +5,14 @@
 .black {
     color: black;
 }
+.text-lightgray {
+    color: lightgrey;
+}
 
 /*typography*/
 
 h1 {
-    font: 300 72px/82px 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-weight: bolder;
 }
 
@@ -50,7 +53,18 @@ a:hover {
 }
 
 /*NAVBAR*/
+.logo-txt {
+    color: purple;
+    font-weight:bolder ;
+    font-size: 1.5rem
+}
+.navbar-brand {
+    font-weight:bold ;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    line-height: 1.8;
 
+}
 #total_items {
     background-color: transparent;
     appearance: auto;
@@ -285,11 +299,11 @@ input.c-empty, input.c-checkout {
 }
 
 #cart-products .p-item {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0);
+    box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.15), 0 6px 20px 0 rgba(0, 0, 0, 0);
 }
 
 #cart-products .hover {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.29);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 10px 40px 0 rgba(0, 0, 0, 0.2);
 }
 
 .p-img {

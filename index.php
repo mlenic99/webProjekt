@@ -31,20 +31,12 @@ require 'navbar.php';
     <div id="hero_img">
         <div class="container p-5">
             <div class="row header align-items-center py-5">
-                <div class="col-12 col-md-6 px-5" id="title">
+                <div class="col-12 px-5" id="title">
                     <h1 class="prime-text py-5">TUNGUZIJA EVENT</h1>
-                    <div class="row justify-content-start">
+                        <div class="mx-2 mb-2 text-lightgray">
+                            <p class="content-title mt-2">THE BEST IN YOUR TOWN</p>
+                        </div>
 
-                        <button type="button" class="btn btn-outline-light mx-2 mb-2 col-5 col-md">
-                            <p class="content-title mt-2 mb-0">THE BEST</p>
-                            <p class="content-title mb-2">IN YOUR TOWN</p>
-                        </button>
-
-                        <button type="button" class="btn btn-outline-secondary mr-2 mb-2 col-5 col-md">
-                            <p class="content-title mt-2 mb-0">COMMING</p>
-                            <p class="content-title mb-2">SOON</p>
-                        </button>
-                    </div>
                 </div>
             </div>
         </div>
@@ -52,27 +44,27 @@ require 'navbar.php';
 
 
     <!--box sjena-->
-    <div class="container-fuid align-items-center my-5 ">
-        <div class="row col-12 col-md-5 col-xl-7 content-text shadow p-2 mb-4 bg-gray offset-md-2">
-            <div class="row col-12 col-xl mb-3">
-                <img class="fit-content mr-4 mt-2" src="Images/icon_rocknroll.png" height="60px" width="60px" alt="Time to eat" loading="lazy">
+    <div class="container  my-5 ">
+        <div class="row col-12 col-md-5 col-xl-7 content-text shadow p-2 mb-4 bg-gray align-items-center justify-content-center">
+            <div class="row col-12 col-xl m-3">
+                <img class="fit-content mr-4 mt-2" src="Images/icon_rocknroll.png" height="60px" width="60px" loading="lazy">
                 <p class="m1-3 mt-2">NAJBOLJI<br>IZVOĐAČI</p>
             </div>
-            <div class="row col-12 col-xl mb-3">
-                <img class="fit-content mr-3" src="Images/icon_music.png" alt="Paris" height="0px" width="60px" loading="lazy">
+            <div class="row col-12 col-xl my-3">
+                <img class="fit-content mr-3" src="Images/icon_music.png"  height="0px" width="60px" loading="lazy">
                 <p class="m1-3 mt-2">NAJBOLJA<br>GLAZBA</p>
             </div>
             <div class="row col-12 col-xl">
-                <img class="fit-content mr-3" src="Images/beer_icon.jpg" alt="Paris" height="0px" width="60px" loading="lazy">
+                <img class="fit-content mr-3" src="Images/beer_icon.jpg"  height="0px" width="60px" loading="lazy">
 
                 <p class="m1-3 mt-2">NAJBOLJA<br>CUGA</p>
             </div>
-            <div class="row col-12 col-xl mb-3">
-                <img class="fit-content mr-4 mt-2" src="Images/icon_tickets.png" height="60px" width="60px" alt="Time to eat" loading="lazy">
+            <div class="row col-12 col-xl my-3">
+                <img class="fit-content mr-4 mt-2" src="Images/icon_tickets.png" height="60px" width="60px"  loading="lazy">
                 <p class="m1-3 mt-2">NAJBOLJE<br>KARTE</p>
             </div>
-            <div class="row col-12 col-xl mb-3">
-                <img class="fit-content mr-4 mt-2" src="Images/icon_rocknroll.png" height="60px" width="60px" alt="Time to eat" loading="lazy">
+            <div class="row col-12 col-xl my-3">
+                <img class="fit-content mr-4 mt-2" src="Images/icon_rocknroll.png" height="60px" width="60px"  loading="lazy">
                 <p class="m1-3 mt-2">NAJBOLJE<br>LOKACIJE</p>
             </div>
 
@@ -83,7 +75,7 @@ require 'navbar.php';
 
 
     <!--Novo u ponudi!-->
-    <div class="row justify-content-center align-items-center mb-4">
+    <div class="text-center mb-4">
         <h2>COMMING SOON! DON'T MISS THE BEST PARTY! BUY TICKETS NOW</h2>
     </div>
 

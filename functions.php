@@ -21,7 +21,8 @@ function show_products($stmt)
 
 
         echo
-        "<div class='p-item col-12 col-md-3 p-2 m-2' id='item" . $id . "' onmouseover='itemhover(" . $id . ")'>
+        "<div class='col-12 col-md-3 p-3' >
+        <div class='p-item p-2' id='item" . $id . "' onmouseover='itemhover(" . $id . ")'>
             <a href='product.php?id=" . $id . "' >
                 <img src=" . $row['eventImgURL'] . " class='p-img mw-100 rounded' alt='" . $name . "'>
                 <div class='p-name banner-prime-text mt-3 mb-2'>
@@ -42,7 +43,7 @@ function show_products($stmt)
                     Količina: 
                 </label>
                 <input type='number' value='1' class='c-qty input-number ml-1' id='input" . $id . "' min='0' max='" . $qty . "' aria-hidden='true' disabled>
-        <input type='button' id='btnAdd" . $id . "'value='Rasprodano' class='cart p-add btn btn-primary w-75 p-2 mt-2' disabled> </div> ";
+        <input type='button' id='btnAdd" . $id . "'value='Rasprodano' class='cart p-add btn btn-primary w-75 p-2 mt-2' disabled> </div></div> ";
 
     }elseif ($_SESSION['cart'][$id] !=0){
         echo "
@@ -50,17 +51,19 @@ function show_products($stmt)
                     Količina: 
                 </label>
                 <input type='number' value='1' class='c-qty input-number ml-1' id='input" . $id . "' min='0' max='" . $qty . "' aria-hidden='true' disabled>
-        <input type='button' id='btnAdd" . $id . "'value='Dodano' class='cart p-add btn btn-primary w-75 p-2 mt-2' disabled> </div> ";
+        <input type='button' id='btnAdd" . $id . "'value='Dodano' class='cart p-add btn btn-primary w-75 p-2 mt-2' disabled> </div></div> ";
     } 
     
     else {
-    echo "
-                <input type='number' value='1' class='c-qty input-number ml-1' id='input" . $id . "' min='0' max='" . $qty . "' aria-hidden='true'>
+    echo "        <label for='quantity' class='content-text pr-1'>
+                    Količina: 
+                </label>
+                <input type='number' value='1' class='c-qty input-number ' id='input" . $id . "' min='0' max='" . $qty . "' aria-hidden='true'>
                 <input type='button' id='btnAdd" . $id . "'value='Add To Cart' class='cart p-add btn btn-primary w-75 p-2 mt-2' onclick='cart(" . $id . ")' >
                 <input type='hidden' id='" . $id . "_name' value=" . $name . ">
                 <input type='hidden' id='" . $id . "_price' value='" . $row['eventPrice'] . "'>
                 <input type='hidden' id='" . $id . "_qty' value=" . $row['eventQty'] . ">
-            </div>  ";}
+           </div> </div>  ";}
         $counter++;
     }
 }

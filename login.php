@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             die("ERROR: Could not connect. " . $e->getMessage());
         }
 
-        // check if it is admin 
+        
         $sql = <<<EOSQL
         SELECT * FROM users WHERE useremail='{$email}' AND userpwd='{$pwdmd5}'
         EOSQL;
@@ -46,7 +46,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             session_start();
             $_SESSION['username'] = $row['username'];
             setcookie("activeLogin", $row["username"], time() + (60 * 120));
-            header("location: dashboard.php");
+            // check if it is admin 
+            if($row['username'] == "admin") {
+                header("location: dashboard.php");
+
+            } else {
+                header("location: dashboard.php"); 
+            }
         } else {
             //No such user in database
             header("location: admin.php?error=NoSuchUser");

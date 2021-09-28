@@ -24,14 +24,14 @@ require 'header.php';
                 <div class="card-body p-5">
                     <form action="addProduct.php" method="post" id="insertProduct">
                         <div id="formInsertProduct">
-                            <h3 class="mb-5" id="formHeader">UPIS NOVOG PROIZVODA</h>
+                            <h3 class="mb-5" id="formHeader">UPIS NOVOG PROIZVODA</h3>
                                 <div class="form-outline mb-4">
                                     <label class="form-label">Naziv::
                                         <input type="text" class="form-control form-control-lg" name="eventName" placeholder="Name" id="eventName" aria-label="Event name" ></label>
                                 </div>
                                 <div class="form-outline mb-4">
                                     <label class="form-label">Cijena kn:
-                                        <input type="number" class="form-control form-control-lg" name="eventPrice" placeholder="Price [kn/kg]" id="eventPrice" aria-label="Event price" ></label>
+                                        <input type="number" class="form-control form-control-lg" name="eventPrice" placeholder="Price" id="eventPrice" aria-label="Event price" ></label>
                                 </div>
                                 <div class="form-outline mb-4">
                                     <label class="form-label">Preostalo ulaznica:
