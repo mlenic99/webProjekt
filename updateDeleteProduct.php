@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         header("location: dashboard.php");
 
     } elseif (isset($_POST['deleteProduct'])) {
-       $sql = "DELETE FROM event WHERE eventID='" . $id . "'";
+       $sql = "DELETE FROM events WHERE eventID='" . $id . "'";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         header("location: dashboard.php");

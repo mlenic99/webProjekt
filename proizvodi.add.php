@@ -10,7 +10,12 @@ try {
 } catch (PDOException $e) {
     die("ERROR: Could not connect. " . $e->getMessage());
 }
-
+if(session_id() == '') {
+    session_start();
+}
+if (!$_SESSION['username'] == 'admin' || !isset($_COOKIE['activeLogin'])) {
+    header("location: index.php");
+}
 require 'header.php';
 ?>
 

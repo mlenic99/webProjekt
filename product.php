@@ -16,6 +16,12 @@ if (isset($_GET['id'])) {
         die("ERROR: Could not connect. " . $e->getMessage());
     }
     // Prepare statement and execute, prevents SQL injection
+    if(session_id() == '') {
+        session_start();
+    }
+    if (!$_SESSION['username'] == 'admin' || !isset($_COOKIE['activeLogin'])) {
+        header("location: index.php");
+    }
     $sql = <<<EOSQL
     SELECT * FROM events WHERE eventID='{$id}' 
     EOSQL;
