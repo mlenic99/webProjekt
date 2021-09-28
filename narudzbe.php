@@ -48,13 +48,13 @@ if ($allOrders != 0) {
         $orderID = $row['orderID'];
         $productsID = $row['productID'];
         $sqlproduct = <<<EOSQL
-    SELECT * FROM products WHERE productsID='{$productsID}'
+    SELECT * FROM events WHERE eventID='{$productsID}'
     EOSQL;
         $queryprod = $conn->prepare($sqlproduct);
         $queryprod->execute();
         $queryprod->setFetchMode(PDO::FETCH_ASSOC);
         foreach ($queryprod as $rowprod) {
-            $product = new Proizvod($row['productID'], $rowprod['productsName'], $row['quantity'], (float)$rowprod['productsPrice']);
+            $product = new Proizvod($row['productID'], $rowprod['eventName'], $row['quantity'], (float)$rowprod['eventPrice']);
             $allOrders[$orderID]->add_products($product);
         }
     }
@@ -99,7 +99,7 @@ require 'header.php';
                     <div class='col-12  px-1 pb-1'>
                         <span class='font-weight-bold'>" . $p->get_name() . " </span>
                         <div>
-                            " . $p->get_quantity()  . "kg, " . $p->get_totalprice()  . " kn
+                            " . $p->get_quantity()  . "x " . $p->get_price()  . " kn
                         </div>
                     </div> ";
                 }

@@ -1,10 +1,9 @@
 <?php
 require_once("./dbconfig.php");
 
-session_start();
-//DESC -> kako bi prikazao najnovije proizvode (imaju veći ID broj)
-
-
+if(session_id() == '') {
+    session_start();
+}
 require 'header.php';
 require 'navbar.php';
 ?>

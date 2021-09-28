@@ -1,5 +1,7 @@
 <?php
-session_start();
+if(session_id() == '') {
+    session_start();
+}
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = array();
 }
@@ -22,12 +24,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         return $data;
     }
 
-    $name = trim_data($_POST['eventName']);
-    $price = trim_data($_POST['eventPrice']);
-    $imgURL = trim_data($_POST['eventImgURL']);
-    $quantity = trim_data($_POST['eventQty']);
-    $location = trim_data($_POST['eventLocation']);
-    $date = $_POST['eventDate'];
+    $name = trim_data($_POST['name']);
+    $address = trim_data($_POST['address']);
+    $postcode = trim_data($_POST['postcode']);
+    $town = trim_data($_POST['town']);
+    $email = trim_data($_POST['email']);
 
 
 
@@ -77,7 +78,7 @@ require 'navbar.php';
         <?php
         foreach ($_SESSION['cart'] as $id => $qty) {
             $sql = <<<EOSQL
-              SELECT * FROM products WHERE productsID='{$id}' 
+              SELECT * FROM events WHERE eventID='{$id}' 
           EOSQL;
             $query = $conn->prepare($sql);
 
@@ -86,8 +87,15 @@ require 'navbar.php';
             $row = $query->fetch();
 
             $name = $row['eventName'];
-            $price = (float)$row['eventPrice'];
-            $imgURL = $row['eventImgURL'];
+            $sqldate = $row['eventDate'];
+            $location = $row['eventLocation'];
+            $price = $row['eventPrice'];
+            $desc = $row['eventDescription'];
+            $qty = $row['eventQty'];
+            $img = $row['eventImgURL'] ;
+
+            $date = strtotime($sqldate);
+            $myFormatForView = date("d/m/Y", $date);
             $price_total = $qty * $price;
             $_SESSION['total_sum'] += [$id => $price_total];
             $newQty = (int)$row['eventQty'] - (int)$qty;
@@ -104,7 +112,7 @@ require 'navbar.php';
             echo "
                 <div class='row p-1 my-2'>
                     <div class='col-4 col-md-2justify-content-center align-items-center'>
-                        <img src='" . $imgURL . "' class='c-img rounded mw-100 mh-100' alt='" . $name . "' title='" . $name . "'>
+                        <img src='" . $img . "' class='c-img rounded mw-100 mh-100' alt='" . $name . "' title='" . $name . "'>
                     </div>
                     <div class='col-6 row'>
                         <div class='col-12  px-1 pb-1'>

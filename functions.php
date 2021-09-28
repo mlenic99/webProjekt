@@ -12,6 +12,7 @@ function show_products($stmt)
         $id = $row['eventID'];
         $name = $row['eventName'];
         $sqldate = $row['eventDate'];
+        $img = $row['eventImgURL'] ;
         $location = $row['eventLocation'];
         $price = $row['eventPrice'];
         $desc = $row['eventDescription'];
@@ -24,7 +25,7 @@ function show_products($stmt)
         "<div class='col-12 col-md-3 p-3' >
         <div class='p-item p-2' id='item" . $id . "' onmouseover='itemhover(" . $id . ")'>
             <a href='product.php?id=" . $id . "' >
-                <img src=" . $row['eventImgURL'] . " class='p-img mw-100 rounded' alt='" . $name . "'>
+                <img src=" .$img . " class='p-img mw-100 rounded' alt='" . $name . "'>
                 <div class='p-name banner-prime-text mt-3 mb-2'>
                     " . $name . "
                 </div>
