@@ -67,7 +67,7 @@ require 'navbar.php';
 
 } else {
     header("location: index.php");
-//    echo "smth is wrong";
+    exit();
 }
 ?>
 <div class="container " id="overview">
@@ -119,7 +119,7 @@ require 'navbar.php';
                             <span class='cart-thead'>Naziv proizvoda: </span>" . $name . "
                         </div>
                         <div class='col-12  p-1'>
-                            <span class='cart-thead'>Količina (kg): </span>" . $qty . " 
+                            <span class='cart-thead'>Količina: </span>" . $qty . " 
                         </div>
                         <div class='col-12  p-1'>
                             <span class='cart-thead'>Cijena: </span>" . $price_total . " kn
