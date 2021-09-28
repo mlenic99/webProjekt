@@ -31,9 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
     if (isset($_POST['updateProduct'])) {
-        
         $sql = "UPDATE events SET eventName='" . $name . "', eventPrice = '" . $price . "',eventLocation='" . $location . "',eventDate='" . $date . "',eventImgURL='" . $imgURL . "', eventQty = '" . $quantity . "', eventDescription = '".$desc."' WHERE eventID='" . $id . "'";
-
         // Prepare statement
         $stmt = $conn->prepare($sql);
         // execute the query
